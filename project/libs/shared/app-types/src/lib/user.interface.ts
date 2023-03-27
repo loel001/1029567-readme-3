@@ -5,8 +5,9 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
-  dateBirth: Date;
-  avatar: string;
+  avatar?: string;
   passwordHash: string;
-  role: UserRole;
+  postsCount: number;
+  subscribersCount: number;
+  createDate: Date;
 }
