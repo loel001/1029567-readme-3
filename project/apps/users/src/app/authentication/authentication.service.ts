@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { BlogUserMemoryRepository } from '../blog-user/blog-user-memory.repository';
 import { CreateUserDto } from './dto/create-user.dto';
-import dayjs from 'dayjs';
 import { AUTH_USER_EXISTS, AUTH_USER_NOT_FOUND, AUTH_USER_PASSWORD_WRONG } from './authentication.constant';
 import { BlogUserEntity } from '../blog-user/blog-user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -27,7 +26,7 @@ export class AuthenticationService {
       passwordHash: '',
       postsCount: 0,
       subscribersCount: 0,
-      createDate: dayjs().toDate(),
+      createDate: new Date().toISOString(),
     };
 
     const existUser = await this.blogUserRepository
