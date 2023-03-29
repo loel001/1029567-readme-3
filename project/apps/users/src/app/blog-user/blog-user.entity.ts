@@ -5,8 +5,7 @@ import { SALT_ROUNDS } from './blog-user.constant';
 export class BlogUserEntity implements User {
   public _id: string;
   public email: string;
-  public firstname: string;
-  public lastname: string;
+  public name: string;
   public avatar: string;
   public passwordHash: string;
   public postsCount: number;
@@ -24,8 +23,7 @@ export class BlogUserEntity implements User {
   public fillEntity(blogUser: User) {
     this._id = blogUser._id;
     this.email = blogUser.email;
-    this.firstname = blogUser.firstname;
-    this.lastname = blogUser.lastname;
+    this.name = blogUser.name;
     this.avatar = blogUser.avatar;
     this.passwordHash = blogUser.passwordHash;
     this.postsCount = blogUser.postsCount;
