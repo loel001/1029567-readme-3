@@ -6,5 +6,5 @@ export interface User {
   passwordHash?: string;
   postsCount?: number;
   subscribersCount?: number;
-  createDate?: string;
+  createDate?: Date;
 }

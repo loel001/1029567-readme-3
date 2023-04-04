@@ -10,7 +10,7 @@ export class BlogUserEntity implements User {
   public passwordHash: string;
   public postsCount: number;
   public subscribersCount: number;
-  public createDate: string;
+  public createDate: Date;
 
   constructor(blogUser: User) {
     this.fillEntity(blogUser);
