@@ -12,26 +12,27 @@ datasource db {
 }
 
 model Post {
-  postId       Int        @id @default(autoincrement()) @map("post_id")
-  type         PostType
-  userId       String     @default("") @map("user_id")
-  createdAt    DateTime   @default(now()) @map("created_at")
-  publishAt    DateTime   @updatedAt @map("publish_at")
-  status       PostStatus
-  createUserId String     @default("") @map("create_user_id")
-  isReposted   Boolean    @default(false) @map("is_reposted")
-  title        String?
-  videoLink    String?    @map("video_link")
-  announcement String?
-  text         String?
-  photo        String?
-  link         String?
-  description  String?
-  quote        String?
-  quoteAuthor  String?    @map("quote_author")
-  tags         Tag[]
-  comments     Comment[]
-  likes        Like[]
+  postId        Int        @id @default(autoincrement()) @map("post_id")
+  type          PostType
+  userId        String     @default("") @map("user_id")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  publishAt     DateTime   @updatedAt @map("publish_at")
+  status        PostStatus
+  createUserId  String     @default("") @map("create_user_id")
+  isReposted    Boolean    @default(false) @map("is_reposted")
+  title         String?
+  videoLink     String?    @map("video_link")
+  announcement  String?
+  text          String?
+  photo         String?
+  link          String?
+  description   String?
+  quote         String?
+  quoteAuthor   String?    @map("quote_author")
+  tags          Tag[]
+  comments      Comment[]
+  likesCount    Int        @default(0) @map("likes_count")
+  commentsCount Int        @default(0) @map("comments_count")
 
   @@map("posts")
 }
@@ -54,17 +55,6 @@ model Comment {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("comments")
-}
-
-model Like {
-  likeId    Int      @id @default(autoincrement()) @map("like_id")
-  post      Post     @relation(fields: [postId], references: [postId], onDelete: Cascade)
-  postId    Int      @map("post_id")
-  userId    String   @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-
-  @@map("likes")
 }
 
 enum PostStatus {
