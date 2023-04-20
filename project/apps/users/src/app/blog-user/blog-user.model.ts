@@ -35,7 +35,7 @@ export class BlogUserModel extends Document implements User {
   @Prop({
     required: true,
   })
-  public createDate: Date;
+  public createDate: number;
 }
 
 export const BlogUserSchema = SchemaFactory.createForClass(BlogUserModel);

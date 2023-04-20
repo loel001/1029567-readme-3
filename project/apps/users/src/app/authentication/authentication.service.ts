@@ -33,7 +33,7 @@ export class AuthenticationService {
       passwordHash: '',
       postsCount: 0,
       subscribersCount: 0,
-      createDate: dayjs().toDate(),
+      createDate: dayjs().unix(),
     };
 
     const existUser = await this.blogUserRepository
