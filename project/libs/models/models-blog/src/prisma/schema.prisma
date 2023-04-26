@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  postId        Int        @id @default(autoincrement()) @map("post_id")
+  type          PostType
+  userId        String     @default("") @map("user_id")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  publishAt     DateTime   @updatedAt @map("publish_at")
+  status        PostStatus
+  createUserId  String     @default("") @map("create_user_id")
+  isReposted    Boolean    @default(false) @map("is_reposted")
+  title         String?
+  videoLink     String?    @map("video_link")
+  announcement  String?
+  text          String?
+  photo         String?
+  link          String?
+  description   String?
+  quote         String?
+  quoteAuthor   String?    @map("quote_author")
+  tags          String[]
+  comments      Comment[]
+  likesCount    Int        @default(0) @map("likes_count")
+  commentsCount Int        @default(0) @map("comments_count")
+
+  @@map("posts")
+}
+
+// model Tag {
+//   id    Int    @id @default(autoincrement())
+//   title String
+//   posts Post[]
+//
+//   @@map("tags")
+// }
+
+model Comment {
+  commentId Int      @id @default(autoincrement()) @map("comment_id")
+  message   String
+  userId    String   @map("user_id")
+  post      Post     @relation(fields: [postId], references: [postId], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int      @map("post_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("comments")
+}
+
+enum PostStatus {
+  posted
+  draft
+}
+
+enum PostType {
+  video
+  text
+  quote
+  photo
+  link
+}

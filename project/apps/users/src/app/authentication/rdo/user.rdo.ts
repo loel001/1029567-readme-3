@@ -36,7 +36,7 @@ export class UserRdo {
     example: '1981-03-12'
   })
   @Expose()
-  public createDate: Date;
+  public createDate: number;
 
   @ApiProperty({
     description: 'posts Count',

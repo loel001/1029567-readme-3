@@ -1,0 +1,18 @@
+# Create new comment
+POST http://localhost:3333/api/comment HTTP/1.1
+Content-Type: application/json
+
+{
+  "message": "Comment message",
+  "postId": 1,
+  "userId": "15"
+}
+###
+
+# Delete comment
+DELETE http://localhost:3333/api/comment/1 HTTP/1.1
+###
+
+# Get post comments
+GET http://localhost:3333/api/comment/post/1 HTTP/1.1
+###
