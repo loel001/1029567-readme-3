@@ -1,0 +1,51 @@
+# Get post by ID
+GET http://localhost:3333/api/post/2 HTTP/1.1
+
+###
+
+# Delete post by ID
+DELETE http://localhost:3333/api/post/2 HTTP/1.1
+
+###
+
+# Create a new post
+POST http://localhost:3333/api/post/new HTTP/1.1
+Content-Type: application/json
+
+{
+  "type": "text11111111",
+  "title": "test",
+  "announcement": "test test",
+  "description": "description",
+  "text": "text"
+}
+
+###
+
+# Update post
+PATCH http://localhost:3333/api/post/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "test2"
+}
+
+###
+
+# Create a new photo post
+POST http://localhost:3333/api/post/new HTTP/1.1
+Content-Type: application/json
+
+{
+  "type": "photo",
+  "status": "posted",
+  "title": "title",
+  "photo": "photo"
+}
+
+###
+
+# get all posts
+GET http://localhost:3333/api/post HTTP/1.1
+
+###

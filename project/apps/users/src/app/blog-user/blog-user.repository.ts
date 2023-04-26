@@ -5,6 +5,7 @@ import { User } from '@project/shared/app-types';
 import { BlogUserModel } from './blog-user.model';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import {PostStatus, PostType} from "@prisma/client";
 
 @Injectable()
 export class BlogUserRepository implements CRUDRepository<BlogUserEntity, string, User> {
@@ -35,7 +36,7 @@ export class BlogUserRepository implements CRUDRepository<BlogUserEntity, string
       .exec();
   }
 
-  public async update(id: string, item: BlogUserEntity): Promise<User> {
+  public async update(id: number, item: { createUserId?: string; comments?: Comment[]; publishAt?: number; link?: string; photo?: string; description?: string; postId?: number; type?: PostType; title?: string; userId?: string; tags: string[]; createdAt?: number; likesCount?: number; quote?: string; commentsCount?: number; isReposted?: boolean; quoteAuthor?: string; videoLink?: string; text?: string; status?: PostStatus; announcement?: string }): Promise<R> {
     return this.blogUserModel
       .findByIdAndUpdate(id, item.toObject(), {new: true})
       .exec();

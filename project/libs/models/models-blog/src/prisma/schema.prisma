@@ -29,7 +29,7 @@ model Post {
   description   String?
   quote         String?
   quoteAuthor   String?    @map("quote_author")
-  tags          Tag[]
+  tags          String[]
   comments      Comment[]
   likesCount    Int        @default(0) @map("likes_count")
   commentsCount Int        @default(0) @map("comments_count")
@@ -37,13 +37,13 @@ model Post {
   @@map("posts")
 }
 
-model Tag {
-  id    Int    @id @default(autoincrement())
-  title String
-  posts Post[]
-
-  @@map("tags")
-}
+// model Tag {
+//   id    Int    @id @default(autoincrement())
+//   title String
+//   posts Post[]
+//
+//   @@map("tags")
+// }
 
 model Comment {
   commentId Int      @id @default(autoincrement()) @map("comment_id")
@@ -52,7 +52,6 @@ model Comment {
   post      Post     @relation(fields: [postId], references: [postId], onDelete: Cascade, onUpdate: Cascade)
   postId    Int      @map("post_id")
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("comments")
 }

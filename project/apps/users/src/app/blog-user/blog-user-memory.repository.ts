@@ -3,6 +3,7 @@ import { CRUDRepository } from '@project/util/util-types';
 import { BlogUserEntity } from './blog-user.entity';
 import { User } from '@project/shared/app-types';
 import { Injectable } from '@nestjs/common';
+import {PostStatus, PostType} from "@prisma/client";
 
 @Injectable()
 export class BlogUserMemoryRepository implements CRUDRepository<BlogUserEntity, string, User> {
@@ -38,7 +39,7 @@ export class BlogUserMemoryRepository implements CRUDRepository<BlogUserEntity, 
     delete this.repository[id];
   }
 
-  public async update(id: string, item: BlogUserEntity): Promise<User> {
+  public async update(id: number, item: { createUserId?: string; comments?: Comment[]; publishAt?: number; link?: string; photo?: string; description?: string; postId?: number; type?: PostType; title?: string; userId?: string; tags: string[]; createdAt?: number; likesCount?: number; quote?: string; commentsCount?: number; isReposted?: boolean; quoteAuthor?: string; videoLink?: string; text?: string; status?: PostStatus; announcement?: string }): Promise<R> {
     this.repository[id] = {...item.toObject(), _id: id};
     return this.findById(id);
   }
