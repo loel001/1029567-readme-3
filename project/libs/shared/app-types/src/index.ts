@@ -10,3 +10,4 @@ export * from './lib/post-video.interface';
 export * from './lib/blog-post.interface';
 export * from './lib/post-type.enum';
 export * from './lib/post-status.enum';
+export * from './lib/file.interface';
