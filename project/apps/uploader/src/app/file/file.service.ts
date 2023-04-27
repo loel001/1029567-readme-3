@@ -5,6 +5,9 @@ import { ensureDir } from 'fs-extra';
 import { writeFile } from 'node:fs/promises';
 import { Express } from 'express';
 import 'multer';
+import dayjs from 'dayjs';
+import * as crypto from 'node:crypto';
+import { extension } from 'mime-types';
 
 @Injectable()
 export class FileService {
@@ -13,8 +16,14 @@ export class FileService {
     private readonly applicationConfig: ConfigType<typeof uploaderConfig>,
   ) {}
   public async writeFile(file: Express.Multer.File): Promise<string> {
-    const uploadDirectoryPath = this.applicationConfig.uploadDirectory;
-    const destinationFile = `${uploadDirectoryPath}/${file.originalname}`;
+    const [ year, month ] = dayjs().format('YYYY MM').split(' ');
+    const { uploadDirectory } = this.applicationConfig;
+
+    const filename = crypto.randomUUID();
+    const fileExtension = extension(file.mimetype);
+
+    const uploadDirectoryPath = `${uploadDirectory}/${year}/${month}`;
+    const destinationFile = `${uploadDirectoryPath}/${filename}.${fileExtension}`;
 
     await ensureDir(uploadDirectoryPath);
     await writeFile(destinationFile, file.buffer);
